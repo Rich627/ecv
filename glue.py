@@ -19,7 +19,7 @@ TABLE_NAME = 'orders'
 PARTITION_KEY = 'item_system__c'
 
 # 取得命令列參數
-args = getResolvedOptions(sys.argv, ["JPB_NAME"])
+args = getResolvedOptions(sys.argv, ["JOB_NAME"])
 
 # Init Spark, Glu, job
 sc = SparkContext()
@@ -66,14 +66,14 @@ dyf_df = dyf.toDF()
 dyf_df = dyf_df.withColumn("date_id__c", to_date(col("date_id__c"), "yyyy/MM/dd"))
 dyf_dyf = glueContext.create_dynamic_frame.fromDF(dyf_df, glueContext, "dyf")
 
-# Write to parquet format
-glueContext.write_dynamic_frame.from_options(
-    frame=dyf_dyf,
-    connection_type="s3",
-    connection_options={"path": OUTPUT_PATH},
-    format="parquet",
-    transformation_ctx="datasink"
-)
+# # Write to parquet format
+# glueContext.write_dynamic_frame.from_options(
+#     frame=dyf_dyf,
+#     connection_type="s3",
+#     connection_options={"path": OUTPUT_PATH},
+#     format="parquet",
+#     transformation_ctx="datasink"
+# )
 
 
 job.commit()
