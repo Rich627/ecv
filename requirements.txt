@@ -1,0 +1,11 @@
+boto3
+pandas
+matplotlib
+ipywidgets
+awswrangler
+awscli
+botocore
+pyspark
+openpyxl
+plotly
+nbformat
